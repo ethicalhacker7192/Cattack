@@ -1,4 +1,4 @@
-disclaimer = """
+banner = """
 This script is the digital equivalent of a fireworks display in a library. 
 It is not meant to be stealthy, subtle, or remotely covert. It's as conspicuous as 
 a marching band in a monastery. Tread with caution, and remember, with great power 
