@@ -88,8 +88,7 @@ def start_nc_listener():
 def start_http_server():
     subprocess.run(['python3', '-m', 'http.server', '80'])
 
-# Gather necessary evil details from the user
-print(disclaimer)
+print(banner)
 
 url = input("Enter the URL (must be in format 'http://IP' or 'https://IP'): ")
 ip = input("Enter your listener IP (must be in the format 'IP' yep, confusing right?): ")
