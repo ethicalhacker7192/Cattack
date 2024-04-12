@@ -6,7 +6,10 @@ comes great responsibility to not do something monumentally stupid and irrespons
 This was inspired by the tryhackme "dogcat" room, check it out one day, it's unique.
 
 Intentions:
-This script is aimed at educating. It should only be used for educational purposes, it is meant to teach you to some extent, the theory and practices used to set up LFI exploits. This does not cover everything, and the range of attack is very limited, making it great for education, mostly because it only works on old versions of apache, and you would have to have many misconfigurations. Dispite these benefits, there is still a chance it could be used for harm, and I do not condone or take responsibility for these actions as I am not the one abusing this educational tool.
+This script is aimed at educating.
+It should only be used for educational purposes, it is meant to teach you to some extent, theory and practices for setting up LFI exploits.
+This does not cover everything, and the range of attack is very limited, making it great for education, mostly because it only works on old versions of apache2, and you would have to have many misconfigurations in order for it to become a dangerous possibility.
+Dispite these benefits, there is still a chance it could be used for harm, and I do not condone these actions, you are responsible for your own actions and if you misuse this, you could face legal issues.
 
 All credit to "Pentestmonkey" for the php reverse shell.
 
@@ -15,6 +18,7 @@ Now that the first disclaimer is over, let's move over to the legal side of thin
 This tool may be used for legal purposes only.  Users take full responsibility for any actions performed using this tool.
 The author accepts no liability for damage caused by this tool.
 If these terms are not acceptable to you, then do not use this tool.
+There is no WARRANTY that comes with this software, use it at your own risk.
 
 
 
