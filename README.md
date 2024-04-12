@@ -8,7 +8,7 @@ comes great responsibility to not do something monumentally stupid and irrespons
 This was inspired by the tryhackme "dogcat" room, check it out one day, it's unique.
 
 ## Intentions:
-This script is aimed at educating. It should only be used for educational purposes, it is meant to teach you to some extent, the theory and practices used to set up LFI exploits. This does not cover everything, and the range of attack is very limited, making it great for education, mostly because it only works on old versions of apache, and you would have to have many misconfigurations. Dispite these benefits, there is still a chance it could be used for harm, and I do not condone or take responsibility for these actions as I am not the one abusing this educational tool.
+This script is aimed at educating. It should only be used for educational purposes, it is meant to teach you to some extent, the theory and practices used to set up LFI exploits. This does not cover everything, and the range of attack is very limited, making it great for education, mostly because it only works on old versions of apache2, and you would have to have many misconfigurations for it to become a very dangerous possibilty. Dispite these benefits, there is still a chance it could be used for harm, and I do not condone these actions, you are responsible for your own actions and if you misuse this, you could face legal issues.
 
 All credit to "Pentestmonkey" for the php reverse shell.
 
