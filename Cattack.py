@@ -353,4 +353,4 @@ except Exception as e:
 listener_thread.join()
 exit(0)
 
-# Note that I skipped reconnasaince, in a real-life scenario, your number 1 priority should be to gain as much information as you can about your target before engaging, this option is much more stealthy and practical if done properly.
+# Note that I skipped reconnasaince, in a real-life scenario, your number 1 priority should be to gain as much information as you can about your target before running any exploits, this option is much more stealthy and practical if done properly.
