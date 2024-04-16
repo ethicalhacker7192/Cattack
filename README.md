@@ -1,13 +1,13 @@
 # Cattack
 A educational LFI exploit tool that only works on older apache2 versions.
 
+## DISCLAIMERS
 This script is the digital equivalent of a fireworks display in a library. 
 It is not meant to be stealthy, subtle, or remotely covert. It's as conspicuous as 
 a marching band in a monastery. Tread with caution, and remember, with great power 
 comes great responsibility to not do something monumentally stupid and irresponsible.
 This was inspired by the tryhackme "dogcat" room, check it out one day, it's unique.
 
-## Intentions:
 This script is aimed at educating. It should only be used for educational purposes, it is meant to teach you to some extent, the theory and practices used to set up LFI exploits. This does not cover everything, and the range of attack is very limited, making it great for education, mostly because it only works on old versions of apache2, and you would have to have many misconfigurations for it to become a very dangerous possibilty. Dispite these benefits, there is still a chance it could be used for harm, and I do not condone these actions, you are responsible for your own actions and if you misuse this, you could face legal issues.
 
 All credit to "Pentestmonkey" for the php reverse shell.
