@@ -1,5 +1,5 @@
 # Cattack
-A educational LFI exploit tool that works on misconfigured systems.
+A educational LFI exploit tool that works on severely misconfigured systems.
 
 ## DISCLAIMERS
 This script is the digital equivalent of a fireworks display in a library. 
